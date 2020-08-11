@@ -2,17 +2,15 @@
 # import requests
 import json
 import urllib.request
-# from urllib.parse import urlencode
 from urllib.parse import urlencode
-# import ssl
-#
-# ssl._create_default_https_contest = ssl._create_unverified_context
 # import itchat
 
 
 def weather_main():
-    city = input('请输入要查询的城市名称： ')  # 输入城市名称
-    location = city  # 定义城市参数
+    # 输入城市名称
+    city = input('请输入要查询的城市名称： ')
+    # 定义城市参数
+    location = city
 
     # 拼接输入和key
     params_weather = {
@@ -28,6 +26,12 @@ def weather_main():
     url2 = air_base_url + urlencode(params_weather)
     url3 = life_base_url + urlencode(params_weather)
     url4 = today_base_url + urlencode(params_weather)
+
+    # 打印拼接地址
+    # print(url1)
+    # print(url2)
+    # print(url3)
+    # print(url4)
 
     # 使用request发起请求，接受返回的结果
     req_weather = urllib.request.urlopen(url1)
@@ -52,9 +56,6 @@ def weather_main():
     date_weather = json_date_weather['HeWeather6'][0]
     date_life = json_date_life['HeWeather6'][0]
     date_today = json_date_today['HeWeather6'][0]
-
-    # 增减判断条件
-    # 取出stage
 
     # 获取pm2.5的数值
     pm25 = date_air['air_now_city']['pm25']
@@ -113,26 +114,36 @@ def weather_main():
     # print(today_weather_dir)
     # print(today_weather_sc)
 
-    weather_forcast_txt = ["%s今天白天天气%s，夜间天气%s，最高气温%s摄氏度，最低气温%s摄氏度，风力%s，风向%s，天气舒适度：%s，%s流感指数：%s，%s穿衣指数：%s，%s现在外面的天气：%s，当前温度：%s，当前风力：%s，当前PM指数：%s"
-                           %(city,
-                             today_weather_day,
-                             today_weather_night,
-                             today_weather_max,
-                             today_weather_min,
-                             today_weather_sc,
-                             today_weather_dir,
-                             comf,
-                             comf_txt,
-                             flu,
-                             flu_txt,
-                             drsg,
-                             drsg_txt,
-                             now_weather,
-                             now_tmp,
-                             now_wind_sc,
-                             pm25
-                             )]
+    weather_forcast_txt = [
+        "%s今天白天天气%s，夜间天气%s，最高气温%s摄氏度，最低气温%s摄氏度，风力%s，风向%s，天气舒适度：%s，%s流感指数：%s，%s穿衣指数：%s，%s现在外面的天气：%s，当前温度：%s，当前风力：%s"
+        "，当前PM指数：%s "
+        % (city,
+           today_weather_day,
+           today_weather_night,
+           today_weather_max,
+           today_weather_min,
+           today_weather_sc,
+           today_weather_dir,
+           comf,
+           comf_txt,
+           flu,
+           flu_txt,
+           drsg,
+           drsg_txt,
+           now_weather,
+           now_tmp,
+           now_wind_sc,
+           pm25
+           )]
     print(weather_forcast_txt)
+
+    # nickname = input('please input your firends\' nickname: ')
+    # users = itchat.search_friends(name = nickname)
+    # print(users)
+    # userName = users[0]['UserName']
+    # itchat.send(weather_forcast_txt, toUserName=userName)
+
+    # print('succeed')
 
 
 weather_main()

@@ -80,7 +80,7 @@ def get_pages(max_page):
             page = str(int(start)//10) + str(index)  # '12' + '11'      '1211'
         url = 'http://www.521609.com/meinvxiaohua/list%s.html' % page
         html = get_html(url)
-        thread = threading.Thread(target=down_show, args=(html,page))  # 元\组
+        thread = threading.Thread(target=down_show, args=(html,page))  # 元\组 元组当时错误，为'down_show'
         thread.start()
     print('美女图片爬取完毕')
 
